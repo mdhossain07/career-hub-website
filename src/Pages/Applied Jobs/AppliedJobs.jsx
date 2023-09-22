@@ -5,15 +5,34 @@ import { getStroedJobApplication } from "../../utility/localStorage";
 const AppliedJobs = () => {
   const jobs = useLoaderData();
   const [jobsApply, setJobsApply] = useState([]);
+  const [displayData, setDisplaydData] = useState([]);
+
+  console.log(displayData);
 
   useEffect(() => {
     const appliedJobsId = getStroedJobApplication();
     if (jobs.length) {
       const jobsApplied = jobs.filter((job) => appliedJobsId.includes(job.id));
-      console.log(jobsApplied);
       setJobsApply(jobsApplied);
+      setDisplaydData(jobsApplied);
     }
-  }, []);
+  }, [jobs]);
+
+  const hadnleFilterData = (filter) => {
+    if (filter === "all") {
+      setDisplaydData(jobsApply);
+    } else if (filter === "remote") {
+      const remoteJobs = jobsApply.filter(
+        (job) => job.remote_or_onsite === "Remote"
+      );
+      setDisplaydData(remoteJobs);
+    } else if (filter === "onsite") {
+      const onSiteJobs = jobsApply.filter(
+        (job) => job.remote_or_onsite === "Onsite"
+      );
+      setDisplaydData(onSiteJobs);
+    }
+  };
   return (
     <div>
       <div className="flex justify-between">
@@ -21,20 +40,20 @@ const AppliedJobs = () => {
         <details className="dropdown mb-20 mt-10">
           <summary className="m-1 btn">Filter By</summary>
           <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-            <li>
+            <li onClick={() => hadnleFilterData("all")}>
               <a>All</a>
             </li>
-            <li>
+            <li onClick={() => hadnleFilterData("remote")}>
               <a>Remote</a>
             </li>
-            <li>
+            <li onClick={() => hadnleFilterData("onsite")}>
               <a>On Site</a>
             </li>
           </ul>
         </details>
       </div>
       <div className="">
-        {jobsApply.map((job) => (
+        {displayData.map((job) => (
           <div key={job.id} className="hero bg-base-200 mb-10 rounded-xl">
             <div className="hero-content flex-col lg:flex-row">
               <img src={job.logo} className="max-w-sm rounded-lg shadow-2xl" />

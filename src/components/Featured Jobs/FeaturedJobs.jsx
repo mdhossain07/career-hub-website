@@ -47,14 +47,15 @@ const FeaturedJobs = () => {
           </div>
         ))}
       </div>
-
-      <div className="card-actions justify-center mt-5">
-        <button
-          onClick={() => setDataLength(jobs.length)}
-          className="btn btn-secondary {dataLength === jobs.length && 'hidden'}"
-        >
-          View Details
-        </button>
+      <div className={dataLength === jobs.length && "hidden"}>
+        <div className="card-actions justify-center mt-5">
+          <button
+            onClick={() => setDataLength(jobs.length)}
+            className="btn btn-secondary {dataLength === jobs.length && 'hidden'}"
+          >
+            View Details
+          </button>
+        </div>
       </div>
     </div>
   );
