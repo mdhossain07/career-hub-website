@@ -1,12 +1,15 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+
+const all = import.meta.env;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCcl_RrR_UKyGyTG5KeTBb1YO51uC1uKXM",
-  authDomain: "react-career-hub-74590.firebaseapp.com",
-  projectId: "react-career-hub-74590",
-  storageBucket: "react-career-hub-74590.appspot.com",
-  messagingSenderId: "3174776378",
-  appId: "1:3174776378:web:eb4478908bfd6ddb52bf03",
+  apiKey: all.VITE_apiKey,
+  authDomain: all.VITE_authDomain,
+  projectId: all.VITE_projectId,
+  storageBucket: all.VITE_storageBucket,
+  messagingSenderId: all.VITE_messagingSenderId,
+  appId: all.VITE_appId,
 };
 
 const app = initializeApp(firebaseConfig);
