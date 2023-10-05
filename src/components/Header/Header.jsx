@@ -1,7 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
+import useAuth from "../../hooks/useAuth";
 
 const Header = () => {
+  const { user, logOut } = useAuth();
+
+  const handleSignOut = () => {
+    logOut().then(alert("Logged Out Sucessfully!")).catch();
+  };
   const links = (
     <nav className="navbar">
       <NavLink to="/">
@@ -18,6 +24,8 @@ const Header = () => {
       </NavLink>
     </nav>
   );
+
+  console.log(user);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -51,7 +59,17 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user ? (
+          <button onClick={handleSignOut}>
+            <Link to="/" className="btn">
+              Logout
+            </Link>
+          </button>
+        ) : (
+          <Link to="/login" className="btn">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
