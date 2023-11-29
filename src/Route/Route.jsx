@@ -8,6 +8,8 @@ import JobDetails from "../components/Job Details/JobDetails";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
+import Secret from "../Pages/Secret/Secret";
+import Jobs from "../Pages/Home/Jobs/Jobs";
 
 const router = createBrowserRouter([
   {
